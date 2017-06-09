@@ -29,6 +29,10 @@ public class Horca {
 		return fallos;
 	}
 
+	public void setFallos(int fallos) {
+		this.fallos = fallos;
+	}
+
 	/**
 	 * 
 	 */
