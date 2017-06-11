@@ -39,54 +39,56 @@ public class Partida {
 	 * 
 	 * @return letra
 	 */
+	
 	public static char pedirLetra() {
 
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Introduce una letra: ");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		char letra=' ';
-		if (controladorLetra(br)){
+		String aux;
+		int caracter;
+		char letra= ' ';
+		
 			try {
+				caracter =br.read();
+				if (controladorLetra(caracter)){
+					
 				
-				Character.toString((char) br.read());
-								
+				aux = Character.toString((char) caracter);
+				
+				letra = aux.charAt(0);	
+				return letra;
+				}else{
+					pedirLetra();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else{
-			pedirLetra();
-		}
-
+		
+		
+System.out.println("fuera letra ---> " + letra);
 		return letra;
 }
 	
 
-	private static boolean controladorLetra(BufferedReader letra) {
+	private static boolean controladorLetra(int letra) throws IOException {
 
-		
 		boolean aceptada = true;
-		try {
-			int[] charRestringidos = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
-					52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 93, 94, 95, 96, 123, 124, 125, 126 };
-
-			int ascii = letra.read();
-			for (int i = 0; i < charRestringidos.length; i++) {
-				if (ascii == charRestringidos[i]) {
-					aceptada = false;
-					return aceptada;
-				}
+		int[] charRestringidos = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+				52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 93, 94, 95, 96, 123, 124, 125, 126 };
+		
+		for (int i = 0; i < charRestringidos.length; i++) {
+			if (letra == charRestringidos[i]) {
+				aceptada = false;
+				return aceptada;
 			}
-			if (ascii == 13) {
-				System.out.println("\nHASPULSADO ENTER\n");
-				pedirLetra();
-			}
-			
-			return aceptada;
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		return false;
+		if (letra == 13) {
+			System.out.println("\n [ HASPULSADO ENTER ]\n");
+			pedirLetra();
+		}
+		return aceptada;
 	}
 
 	/**

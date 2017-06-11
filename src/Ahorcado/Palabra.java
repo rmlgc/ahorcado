@@ -35,7 +35,9 @@ public class Palabra {
 	/**
 	 * Comprueba si la letra ya ha sido usada.
 	 */
-	public boolean comprobarLetraUsada(char letra) {
+	public boolean comprobarLetraUsada(char letraEntrante) {
+		String letraMinuscula = Character.toString((char) letraEntrante).toLowerCase();
+		char letra = letraMinuscula.charAt(0);
 		for (int i = 0; i < letrasDescubiertas.length; i++) {
 			if (letra == letrasDescubiertas[i]) {
 				return true;
@@ -70,8 +72,10 @@ public class Palabra {
 		}
 	}
 
-	private void insertarLetra(char letra, char[] destino) {
+	private void insertarLetra(char letraEntrante, char[] destino) {
 		// inserta la letra en la primera posicion vacía
+		String letraMayuscula = Character.toString((char) letraEntrante).toUpperCase();
+		char letra = letraMayuscula.charAt(0);
 		for (int i = 0; i < destino.length; i++) {
 			if (destino[i] == '\u0000') {
 				destino[i] = letra;
@@ -87,38 +91,50 @@ public class Palabra {
 	public void mostrarResultados() {
 
 		char[] descompuesta = palabraOculta.toCharArray();
-		System.out.println("Progreso: ");
+		
+		System.out.println("| Progreso: ");
+		System.out.print("| ");
 		for (int i = 0; i < descompuesta.length; i++) {
 			boolean estaEnDescubiertas = false;
+			String coprobante = Character.toString((char) descompuesta[i]).toUpperCase();
+			char letra = coprobante.charAt(0);
 			for (int j = 0; j < letrasDescubiertas.length; j++) {
-				if (descompuesta[i] == letrasDescubiertas[j]) {
+				if (letra == letrasDescubiertas[j]) {
 					estaEnDescubiertas = true;
 				}
 			}
+			
 			if (estaEnDescubiertas) {
-				System.out.print(descompuesta[i]);
+				System.out.print(descompuesta[i] + " ");
 			} else {
-				System.out.print(" _ ");
+				System.out.print("_ ");
 			}
 		}
 		System.out.println();
 
-		System.out.print("Letras descubiertas: ");
+		System.out.print("| " +"Letras descubiertas: ");
 		for (int i = 0; i < letrasDescubiertas.length; i++) {
+			
 			if (letrasDescubiertas[i] != '\u0000') {
-				System.out.print(letrasDescubiertas[i]);
+				String coprobante = Character.toString((char) letrasDescubiertas[i]).toUpperCase();
+				char letra = coprobante.charAt(0);
+				
+				System.out.print(" " +letra);
 			}
 
 		}
 		System.out.println();
-		System.out.print("Letras fallidas: ");
+		System.out.print("| " +"Letras fallidas: ");
 		for (int i = 0; i < letrasFallidas.length; i++) {
 			if (letrasFallidas[i] != '\u0000') {
-				System.out.print(letrasFallidas[i]);
+				String coprobante = Character.toString((char) letrasFallidas[i]).toUpperCase();
+				char letra = coprobante.charAt(0);
+				System.out.print(" " +letra );
+				
 			}
 
 		}
-		System.out.println();
+		System.out.println("\n_______________________________________\n");
 	}
 
 	/**
@@ -156,6 +172,6 @@ public class Palabra {
 	 *         que buscábamos
 	 */
 	public boolean comprobarPalabra(String palabra) {
-		return palabraOculta.equals(palabra);
+		return palabraOculta.toLowerCase().equals(palabra.toLowerCase());
 	}
 };
