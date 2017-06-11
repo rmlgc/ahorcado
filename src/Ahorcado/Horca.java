@@ -38,7 +38,7 @@ public class Horca {
 	 */
 	public void dibujar() {
 		System.out.println("\n_______________________________________");
-		System.out.println("| Fallos: " + fallos );
+		System.out.println("| Fallos: " + fallos);
 	}
 
 	/**

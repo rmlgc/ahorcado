@@ -39,7 +39,7 @@ public class Partida {
 	 * 
 	 * @return letra
 	 */
-	
+
 	public static char pedirLetra() {
 
 		Scanner entrada = new Scanner(System.in);
@@ -48,36 +48,45 @@ public class Partida {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String aux;
 		int caracter;
-		char letra= ' ';
-		
-			try {
-				caracter =br.read();
-				if (controladorLetra(caracter)){
-					
-				
-				aux = Character.toString((char) caracter);
-				
-				letra = aux.charAt(0);	
-				return letra;
-				}else{
-					pedirLetra();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
-		
-System.out.println("fuera letra ---> " + letra);
-		return letra;
-}
-	
+		char letra = ' ';
 
+		try {
+			caracter = br.read();
+			if (controladorLetra(caracter)) {
+
+				aux = Character.toString((char) caracter);
+
+				letra = aux.charAt(0);
+				return letra;
+			} else {
+				pedirLetra();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("fuera letra ---> " + letra);
+		return letra;
+	}
+
+	/**
+	 * Metodo que controlara el caracter insertado omitinedo cualquiera que sea
+	 * diferente al del abecedario
+	 * 
+	 * @param letra
+	 *            valor correspondiente al caracter ASCII
+	 * @return devolvera faslse si se ha detectado un caracter dentro Array de
+	 *         restringidos
+	 * @throws IOException
+	 *             devolvemos cualquier posible error para que sea tratado desde
+	 *             donde lo llaman
+	 */
 	private static boolean controladorLetra(int letra) throws IOException {
 
 		boolean aceptada = true;
-		int[] charRestringidos = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
-				52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 93, 94, 95, 96, 123, 124, 125, 126 };
-		
+		int[] charRestringidos = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
+				53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 93, 94, 95, 96, 123, 124, 125, 126 };
+
 		for (int i = 0; i < charRestringidos.length; i++) {
 			if (letra == charRestringidos[i]) {
 				aceptada = false;
@@ -114,6 +123,11 @@ System.out.println("fuera letra ---> " + letra);
 		return (horca.comprobarSiPerdido() || palabra.comprobarSiGanado());
 	}
 
+	/**
+	 * selecionador de opciones
+	 * 
+	 * @return encaso de no introducior un numero entero se vuelve a este metodo
+	 */
 	public static int elegirDelMenu() {
 
 		try {
@@ -151,7 +165,7 @@ System.out.println("fuera letra ---> " + letra);
 				if (resolver()) {
 					System.out.println("Has ganado!!");
 					noHaResueltoMal = true;
-					
+
 				} else {
 					System.out.println("Lo siento has perdido");
 					noHaResueltoMal = false;
@@ -168,6 +182,6 @@ System.out.println("fuera letra ---> " + letra);
 			}
 
 		}
-System.out.println("\n Juego Terminado");
+		System.out.println("\n Juego Terminado");
 	}
 }

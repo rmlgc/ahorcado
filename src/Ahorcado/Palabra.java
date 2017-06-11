@@ -64,7 +64,7 @@ public class Palabra {
 	 *         palabra y falso en caso contrario
 	 */
 	public boolean comprobarLetra(char letra) {
-		
+
 		if (palabraOculta.toUpperCase().indexOf(Character.toUpperCase(letra)) == -1) {
 			insertarLetra(letra, letrasFallidas);
 			return false;
@@ -74,17 +74,25 @@ public class Palabra {
 		}
 	}
 
+	/**
+	 * registro de un char entrante en los array que se pasen como parametro
+	 * 
+	 * @param letraEntrante
+	 *            letra que se va a introducir
+	 * @param destino
+	 *            array donde se guardara el char
+	 */
 	private void insertarLetra(char letraEntrante, char[] destino) {
 		// inserta la letra en la primera posicion vacía
 		String letraMayuscula = Character.toString((char) letraEntrante).toUpperCase();
-		char letra = letraMayuscula.charAt(0);		
+		char letra = letraMayuscula.charAt(0);
 		for (int i = 0; i < destino.length; i++) {
 			if (destino[i] == '\u0000') {
 				destino[i] = letra;
 				break;
 			}
 		}
-		
+
 	}
 
 	/**
@@ -94,7 +102,7 @@ public class Palabra {
 	public void mostrarResultados() {
 
 		char[] descompuesta = palabraOculta.toCharArray();
-		
+
 		System.out.println("| Progreso: ");
 		System.out.print("| ");
 		for (int i = 0; i < descompuesta.length; i++) {
@@ -106,7 +114,7 @@ public class Palabra {
 					estaEnDescubiertas = true;
 				}
 			}
-			
+
 			if (estaEnDescubiertas) {
 				System.out.print(descompuesta[i] + " ");
 			} else {
@@ -115,25 +123,25 @@ public class Palabra {
 		}
 		System.out.println();
 
-		System.out.print("| " +"Letras descubiertas: ");
+		System.out.print("| " + "Letras descubiertas: ");
 		for (int i = 0; i < letrasDescubiertas.length; i++) {
-			
+
 			if (letrasDescubiertas[i] != '\u0000') {
 				String coprobante = Character.toString((char) letrasDescubiertas[i]).toUpperCase();
 				char letra = coprobante.charAt(0);
-				
-				System.out.print(" " +letra);
+
+				System.out.print(" " + letra);
 			}
 
 		}
 		System.out.println();
-		System.out.print("| " +"Letras fallidas: ");
+		System.out.print("| " + "Letras fallidas: ");
 		for (int i = 0; i < letrasFallidas.length; i++) {
 			if (letrasFallidas[i] != '\u0000') {
 				String coprobante = Character.toString((char) letrasFallidas[i]).toUpperCase();
 				char letra = coprobante.charAt(0);
-				System.out.print(" " +letra );
-				
+				System.out.print(" " + letra);
+
 			}
 
 		}
