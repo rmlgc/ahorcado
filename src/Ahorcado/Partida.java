@@ -4,7 +4,12 @@
 
 package Ahorcado;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
 
 /************************************************************/
 /**
@@ -38,10 +43,50 @@ public class Partida {
 
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Introduce una letra: ");
-		char letra = entrada.nextLine().charAt(0);
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		char letra=' ';
+		if (controladorLetra(br)){
+			try {
+				
+				Character.toString((char) br.read());
+								
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			pedirLetra();
+		}
 
 		return letra;
+}
+	
 
+	private static boolean controladorLetra(BufferedReader letra) {
+
+		
+		boolean aceptada = true;
+		try {
+			int[] charRestringidos = { 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+					52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 93, 94, 95, 96, 123, 124, 125, 126 };
+
+			int ascii = letra.read();
+			for (int i = 0; i < charRestringidos.length; i++) {
+				if (ascii == charRestringidos[i]) {
+					aceptada = false;
+					return aceptada;
+				}
+			}
+			if (ascii == 13) {
+				System.out.println("\nHASPULSADO ENTER\n");
+				pedirLetra();
+			}
+			
+			return aceptada;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
@@ -78,7 +123,7 @@ public class Partida {
 			System.out.println("3. Abandonar");
 			return entrada.nextInt();
 		} catch (Exception e) {
-			System.out.println("Introduce un número");
+			System.out.println("\n [ Introduce un número ]\n\n");
 
 			return elegirDelMenu();
 		}
@@ -107,6 +152,9 @@ public class Partida {
 					System.out.println("Lo siento has perdido");
 					noHaResueltoMal = false;
 				}
+				break;
+			case 4:
+
 				break;
 			case 3:
 				System.exit(0);
