@@ -4,6 +4,8 @@
 
 package Ahorcado;
 
+import java.util.Arrays;
+
 /************************************************************/
 /**
  * 
@@ -62,8 +64,8 @@ public class Palabra {
 	 *         palabra y falso en caso contrario
 	 */
 	public boolean comprobarLetra(char letra) {
-
-		if (palabraOculta.indexOf(letra) == -1) {
+		
+		if (palabraOculta.toUpperCase().indexOf(Character.toUpperCase(letra)) == -1) {
 			insertarLetra(letra, letrasFallidas);
 			return false;
 		} else {
@@ -75,13 +77,14 @@ public class Palabra {
 	private void insertarLetra(char letraEntrante, char[] destino) {
 		// inserta la letra en la primera posicion vacía
 		String letraMayuscula = Character.toString((char) letraEntrante).toUpperCase();
-		char letra = letraMayuscula.charAt(0);
+		char letra = letraMayuscula.charAt(0);		
 		for (int i = 0; i < destino.length; i++) {
 			if (destino[i] == '\u0000') {
 				destino[i] = letra;
 				break;
 			}
 		}
+		
 	}
 
 	/**
@@ -144,8 +147,9 @@ public class Palabra {
 	 */
 	public boolean comprobarSiGanado() {
 		boolean estanTodas = true;
-		char[] descompuesta = palabraOculta.toCharArray();
-
+		char[] descompuesta = palabraOculta.toUpperCase().toCharArray();
+		Arrays.sort(descompuesta);
+		Arrays.sort(letrasDescubiertas);
 		for (int i = 0; i < descompuesta.length; i++) {
 			boolean estaEnDescubiertas = false;
 			for (int j = 0; j < letrasDescubiertas.length; j++) {

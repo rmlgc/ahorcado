@@ -150,6 +150,8 @@ System.out.println("fuera letra ---> " + letra);
 			case 2:
 				if (resolver()) {
 					System.out.println("Has ganado!!");
+					noHaResueltoMal = true;
+					
 				} else {
 					System.out.println("Lo siento has perdido");
 					noHaResueltoMal = false;
@@ -166,6 +168,6 @@ System.out.println("fuera letra ---> " + letra);
 			}
 
 		}
-
+System.out.println("\n Juego Terminado");
 	}
 }
